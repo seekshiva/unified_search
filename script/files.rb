@@ -64,7 +64,7 @@ def add_dir d
         #rename_capitalize file
         #end
         info = get_audio_info "#{$root}/#{dir}/#{file}", hex
-        #puts "INSERT INTO `music` (`sha1_sum`, `audio_name`,`audio_path`, `title`) VALUES (\"#{hex}\", \"#{file}\", \"#{dir}\", \"#{info[:title]}\");"
+        #puts "INSERT INTO `musics` (`sha1_sum`, `audio_name`,`audio_path`, `title`) VALUES (\"#{hex}\", \"#{file}\", \"#{dir}\", \"#{info[:title]}\");"
         
         if info[:album].nil?
           v_album = "Unknown"
