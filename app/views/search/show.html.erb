@@ -1,0 +1,73 @@
+    <div id="blue_tag">
+      <div style="float: right; padding:30px; ">
+	<span style="background-color: #f1f1f1; font-weight: bold; padding: 5px; border: 2px solid #c3c56c; cursor: pointer; border-radius: 8px; ">Shiva Nandan</span>
+      </div>
+      <div class="searchbox_container">
+	<form>
+	  <table cellspacing="0">
+	    <tr>
+	      <td style="width: 177px; "><span id="company_logo">Delta</span></td>
+	      <td style="background-color: rgba(210,212,197,.5); padding: 12px; width:580px; ">
+		<input type="text" name="q" value="<%= params[:q] %>">
+		<input type="submit" value="Go!">
+	      </td>
+	    </tr>
+	    <tr>
+	      <td></td>
+	      <td class="s_filter">
+		Filter: 
+		<input type="checkbox" name="title" id="s_title" value="true" <%= @title_checked %>><label for="s_title">Title</label>
+		<input type="checkbox" name="album" id="s_album" value="true" <%= @album_checked %>><label for="s_album">Album</label>
+		<input type="checkbox" name="artist" id="s_artist" onchange="submit_on_filter_change(this); " value="true" <%= @artist_checked %>><label for="s_artist">Artist</label>
+	      </td>
+	    </tr>
+	  </table>
+	  
+	</form>
+      </div>
+    </div>
+    <div class="s_body">
+
+      <div id="sidebar">
+	<div class="null"><a href="#books">
+	    <div class="s float_r s_type_count">0</div>
+	    Books
+	</a></div>
+	<div class="not_null"><a href="#music">
+	    <div class="s float_r s_type_count"><%= @musics.length %></div>
+	    Music
+	</a></div>
+	<div class="null"><a href="#apps">
+	    <div class="s float_r s_type_count">0</div>
+	    Apps
+	</a></div>
+      </div>
+
+      <% if @musics.length == 0 %>
+      <div id="no_results_found">
+	No results found for <i><%= params[:q] %></i>
+      </div>
+      <% else %>
+      <div id="s_res_container">
+	
+	
+	Total of <%= pluralize(@musics.length + 1, "result") %> found for <%= @query %><br />
+	Search result was found? <i><b>
+	    <% if @musics.blank? %>
+	  no
+	    <% else %>
+	    yes
+	    <% end %>
+	</b></i>
+	<br />
+	<%= @musics.is_a? Array %><br />
+	<%    @musics.each do |music| %>
+      here
+	<%= music.title %>
+	<%    end                     %>
+	
+      </div>
+      <% end %>
+    </div>
+
+</div>
