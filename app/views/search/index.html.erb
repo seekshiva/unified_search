@@ -1,13 +1,79 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Delta</title>
-  </head>
-  <body style="text-align: center; padding: 100px; ">
-    <div style="font-size: 70px; ">Delta</span>
-    <form method="get" action="./search">
-      <input type="text" style="padding: 8px; font-size: 24px; width: 400px; " name="q">
-      <input type="submit" style="padding: 8px; font-size: 20px; " value="Go!">
+<div id="blue_tag">
+  <div style="float: right; padding:30px; ">
+    <span style="background-color: #f1f1f1; font-weight: bold; padding: 5px; border: 2px solid #c3c56c; cursor: pointer; border-radius: 8px; ">Shiva Nandan</span>
+  </div>
+  <div class="searchbox_container">
+    <form>
+      <table cellspacing="0">
+	<tr>
+	  <td style="width: 177px; "><a href="/"><span id="company_logo">Delta</span></a></td>
+	  <td style="background-color: rgba(210,212,197,.5); padding: 12px; width:580px; ">
+	    <input type="text" name="q" value="<%= params[:q] %>">
+	    <input type="submit" value="Go!">
+	  </td>
+	</tr>
+	<tr>
+	  <td></td>
+	  <td class="s_filter">
+	    Filter: 
+	    <input type="checkbox" name="title" id="s_title" value="1" <%= @title_checked %>><label for="s_title">Title</label>
+	    <input type="checkbox" name="album" id="s_album" value="1" <%= @album_checked %>><label for="s_album">Album</label>
+	    <input type="checkbox" name="artist" id="s_artist" value="1" <%= @artist_checked %>><label for="s_artist">Artist</label>
+	  </td>
+	</tr>
+      </table>
+      
     </form>
-  </body>
-</html>
+  </div>
+</div>
+<div class="s_body">
+  
+  <div id="sidebar">
+    <div class="null"><a href="#books">
+	<div class="s float_r s_type_count">0</div>
+	Books
+    </a></div>
+    <div class="not_null"><a href="#music">
+	<div class="s float_r s_type_count"><%= @musics.length %></div>
+	Music
+    </a></div>
+    <div class="null"><a href="#apps">
+	<div class="s float_r s_type_count">0</div>
+	Apps
+    </a></div>
+  </div>
+  
+  <% if @musics.blank? %>
+  <div id="no_results_found">
+    No results found for <i><%= params[:q] %></i>
+  </div>
+  <% else %>
+
+  <div id="s_res_container">
+    <% @albums.each do |album,songs| %>
+    <div class="s_res_album"><%= album %> <i class="x-s">(<%= songs.length %> songs)</i></div>
+    <div style="min-height: 130px; ">
+      <img class="s_res_audio_thumb" src="<%= songs[0].thumbnail %>">
+      
+      <% songs.each do |song| %>
+      <div class="s_res_item">
+	
+	<div class="s_res_audio_title"><%= song.title %></div>
+	<table class="x-s">
+	  <tr>
+	    <td>Artist: <b><%= song.artist %></b></td>
+	    <td>Year: <b><%= song.year %></b></td>
+	  </tr>
+	  <tr>
+	    <td>Genre: <b><%= song.genre %></b></td>
+	    <td>Duration: <b><%= song.duration %></b></td>
+	  </tr>
+	</table>
+      </div>
+      <% end %>
+      
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+</div>

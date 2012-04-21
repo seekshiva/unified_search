@@ -76,7 +76,7 @@ body {
     color: #f1f1f1;
     font-size: small;
     font-weight: bold;
-    height: 50px;
+    height: 45px;
     padding-left: 10px;
 }
 .s_body {
@@ -88,6 +88,9 @@ body {
     
 }
 
+.searchbox_container a {
+     text-decoration: none;
+}
 .searchbox_container #company_logo {
      font-size:52px; 
      font-family: Georgia; 
