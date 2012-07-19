@@ -4,14 +4,23 @@ class SearchController < ApplicationController
   
   def index
     # @musics = Music.where("title = ?", params[:q])
-    @query = params[:q]
+    @query, cond = params[:q], []
     
-    @title_checked = params[:title].nil? ? "" : 'checked="checked"'
+    if params[:q] == ""
+      redirect_to "/" 
+      return
+    end
+    
+    if params[:title].nil?
+      @title_checked = ""
+    else
+      @title_checked = 'checked="checked"'
+      cond[cond.length] = "title like ?" unless @title_checked.empty?
+    end
+    
     @album_checked = params[:album].nil? ? "" : 'checked="checked"'
     @artist_checked = params[:artist].nil? ? "" : 'checked="checked"'
     
-    cond = []
-    cond[cond.length] = "title like ?" unless @title_checked.empty?
     cond[cond.length] = "album like ?" unless @album_checked.empty?
     cond[cond.length] = "artist like ?" unless @artist_checked.empty?
     
@@ -23,9 +32,9 @@ class SearchController < ApplicationController
     @musics.each do |music| 
       sym = music.album.to_sym
       if @albums[ sym ].nil?
-        @albums[sym] = []
+        @albums[ sym ] = []
       end
-      @albums[sym][@albums[sym].length] = music
+      @albums[ sym ][ @albums[ sym ].length ] = music
     end
     
   end
