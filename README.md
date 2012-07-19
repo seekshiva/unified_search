@@ -6,6 +6,7 @@ This is a search engine which allows users to search under different sections su
 In order to use my indexer, go to the root folder which contains all files to be indexed.
 
 >    $ cd /path/to/media/dir/
+>
 >    $ ruby /path/to/script/file.rb
 
 The above script will index all files and write the sql queries to /tmp/audio.sql. You can use that file to dump the data into your database.
